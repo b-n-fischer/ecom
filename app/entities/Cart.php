@@ -16,7 +16,7 @@ class Cart {
 
     public function getTotalNetAmount() {
         return array_reduce($this->items, function($sum, $item){
-            return $sum += $item->getNetAmount();
+            return $sum += $item->getPrice();
         }, 0);
     }
 

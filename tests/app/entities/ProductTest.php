@@ -6,7 +6,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetNetAmount() {
         $product = new Product('apple', 10, 19);
-        $this->assertEquals(10, $product->getNetAmount());
+        $this->assertEquals(10, $product->getPrice());
     }
 
     public function testGetGross() {

@@ -14,6 +14,7 @@ class Product {
         $this->taxation = $taxation;
     }
 
+
     public function getName() {
         return $this->name;
     }
@@ -22,7 +23,7 @@ class Product {
         return $this->taxation;
     }
 
-    public function getNetAmount() {
+    public function getPrice() {
         return $this->price;
     }
 
