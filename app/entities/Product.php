@@ -8,26 +8,53 @@ class Product {
     private $price;
     private $taxation;
 
+    /**
+     * Constructor
+     *
+     * @param string $name
+     * @param float $price
+     * @param float $taxation
+     */
     public function __construct(string $name,float $price,float $taxation) {
         $this->name = $name;
         $this->price = $price;
         $this->taxation = $taxation;
     }
 
-
-    public function getName() {
+    /**
+     * Getter methode $name
+     *
+     * @return string
+     */
+    public function getName(): string {
         return $this->name;
     }
 
-    public function getTaxation() {
+    /**
+     * Getter methode $taxation
+     *
+     * @return float
+     */
+    public function getTaxation(): float {
         return $this->taxation;
     }
 
-    public function getPrice() {
+    /**
+     * Getter methode $price
+     *
+     * @return float
+     */
+    public function getPrice(): float {
         return $this->price;
     }
 
-    public function getGross() {
+    /**
+     * This methode returns the price with taxes
+     * Maybe "Gross" is not the right name for "Brutto Betrag"
+     *
+     * @return float
+     */
+    public function getGross(): float {
         return $this->price * (1 + ($this->taxation / 100));
     }
 }
