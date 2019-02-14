@@ -2,23 +2,30 @@
 
 namespace App\Entities;
 
+use \App\services\TaxCalculator;
+use Money\Money;
+
 class Product {
 
     private $name;
     private $price;
-    private $taxation;
+    private $taxCalculator;
 
     /**
      * Constructor
      *
      * @param string $name
-     * @param float $price
-     * @param float $taxation
+     * @param Money $price
+     * @param TaxCalculator $taxation
      */
-    public function __construct(string $name,float $price,float $taxation) {
+    public function __construct(
+        string $name,
+        Money $price, 
+        TaxCalculator $taxCalculator
+        ) {
         $this->name = $name;
         $this->price = $price;
-        $this->taxation = $taxation;
+        $this->taxCalculator = $taxCalculator;
     }
 
     /**
@@ -36,25 +43,24 @@ class Product {
      * @return float
      */
     public function getTaxation(): float {
-        return $this->taxation;
+        return $this->taxCalculator->getTaxation();
     }
 
     /**
      * Getter methode $price
      *
-     * @return float
+     * @return Money
      */
-    public function getPrice(): float {
+    public function getPrice(): Money {
         return $this->price;
     }
 
     /**
      * This methode returns the price with taxes
-     * Maybe "Gross" is not the right name for "Brutto Betrag"
      *
-     * @return float
+     * @return Money
      */
-    public function getGross(): float {
-        return $this->price * (1 + ($this->taxation / 100));
+    public function getGross(): Money {
+        return $this->price->add($this->taxCalculator->getTax($this->price));
     }
 }

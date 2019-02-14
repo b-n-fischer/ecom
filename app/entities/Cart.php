@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use Money\Money;
+
 class Cart {
 
     /**
@@ -34,22 +36,22 @@ class Cart {
     /**
      * This methode sums up the prices of all items
      *
-     * @return float
+     * @return Money
      */
-    public function getTotalNetAmount(): float {
+    public function getTotalNetAmount(): Money {
         return array_reduce($this->items, function($sum, $item){
-            return $sum += $item->getPrice();
-        }, 0);
+            return $sum->add($item->getPrice());
+        },  Money::EUR(0));
     }
 
     /**
      * This methode sums up the prices with taxes of all items
      *
-     * @return float
+     * @return Money
      */
-    public function getTotalGross(): float {
+    public function getTotalGross(): Money {
         return array_reduce($this->items, function($sum, $item){
-            return $sum += $item->getGross();
-        }, 0);
+            return $sum->add($item->getGross());
+        }, Money::EUR(0));
     }
 }
